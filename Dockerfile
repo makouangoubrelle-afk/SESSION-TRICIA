@@ -32,11 +32,12 @@ COPY . /var/www/html
 # 8. Installation des dépendances PHP (sans les outils de développement)
 RUN composer install --no-interaction --optimize-autoloader --no-dev
 
-# 9. Attribution des permissions aux dossiers de stockage
+# 9. Attribution des permissions (on ajoute le dossier cache de config)
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
-# 10. Exposition du port 80 (port par défaut d'Apache)
+# 10. Exposition du port
 EXPOSE 80
 
-# 11. Nettoyage du cache de config et démarrage
-CMD php artisan config:clear && php artisan cache:clear && apache2-foreground
+# 11. Commande de démarrage forcée
+CMD php artisan config:clear && php artisan cache:clear && php artisan view:clear && apache2-foreground
