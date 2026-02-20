@@ -40,4 +40,4 @@ RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 EXPOSE 80
 
 # 11. Commande de démarrage forcée
-CMD php artisan config:clear && php artisan cache:clear && php artisan view:clear && apache2-foreground
+CMD ["apache2-foreground"]
