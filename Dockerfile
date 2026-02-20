@@ -38,5 +38,5 @@ RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cac
 # 10. Exposition du port 80 (port par défaut d'Apache)
 EXPOSE 80
 
-# 11. Commande pour démarrer Apache au lancement du conteneur
-CMD ["apache2-foreground"]
+# 11. Nettoyage du cache de config et démarrage
+CMD php artisan config:clear && php artisan cache:clear && apache2-foreground
