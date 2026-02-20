@@ -39,5 +39,4 @@ RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 # 10. Exposition du port
 EXPOSE 80
 
-# 11. Commande de démarrage forcée
-CMD ["apache2-foreground"]
+CMD php artisan migrate --force && apache2-foreground
